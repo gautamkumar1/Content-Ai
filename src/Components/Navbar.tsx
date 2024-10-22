@@ -1,106 +1,115 @@
-"use client";
-import Link from "next/link";
+"use client"
+
+import * as React from "react"
+import Link from "next/link"
+import { Menu, X } from "lucide-react"
+
+import { Button } from "../Components/ui/button"
 import {
-  SignInButton,
-  SignUpButton,
-  UserButton,
-  SignedOut,
-  SignedIn,
-  useAuth,
-} from "@clerk/nextjs";
-import { useState, useEffect } from "react";
-import { Menu, X, Zap } from "lucide-react";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../Components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "../Components/ui/avatar"
 
-export function Navbar() {
-  const { userId } = useAuth();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-gray-900/80 backdrop-blur-md" : "bg-transparent"
-      }`}
-    >
-      <nav className="container mx-auto px-4 sm:px-8 py-4 sm:py-6">
-        <div className="flex flex-wrap justify-between items-center max-w-6xl mx-auto">
+    <nav className="bg-white shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <Zap className="w-8 h-8 text-blue-500" />
-              <span className="text-xl sm:text-2xl font-bold text-white">
-                ContentTura AI
-              </span>
+            <Link href="/" className="flex-shrink-0 flex items-center">
+              <span className="text-xl font-bold text-gray-800">Logo</span>
             </Link>
           </div>
-          <button
-            className="sm:hidden text-white focus:outline-none"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
-          <div
-            className={`w-full sm:w-auto ${
-              isMenuOpen ? "block" : "hidden"
-            } sm:block mt-4 sm:mt-0`}
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-8">
-              {["Home","Features", "Pricing"].map((item) => (
-               
-               <Link
-               key={item}
-               href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-               className="text-gray-300 hover:text-white transition-colors py-2 sm:py-0 relative group"
-             >
-                  {item}
-                  <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                </Link>
-              ))}
-              {userId && (
-                <Link
-                  href="/generate"
-                  className="text-gray-300 hover:text-white transition-colors py-2 sm:py-0 relative group"
-                >
-                  Dashboard
-                  <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                </Link>
+          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+            <Link href="/" className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+              Home
+            </Link>
+            <Link href="/pricing" className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+              Pricing
+            </Link>
+            <Link href="/features" className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+              Features
+            </Link>
+            <Link href="/dashboard" className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+              Dashboard
+            </Link>
+          </div>
+          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+            <Button variant="ghost" className="text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+              Sign In
+            </Button>
+            <Button className="ml-2">Sign Up</Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src="/avatars/01.png" alt="@username" />
+                    <AvatarFallback>UN</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">username</p>
+                    <p className="text-xs leading-none text-muted-foreground">
+                      user@example.com
+                    </p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuItem>Log out</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <div className="flex items-center sm:hidden">
+            <Button variant="ghost" onClick={toggleMenu} className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+              <span className="sr-only">Open main menu</span>
+              {isMenuOpen ? (
+                <X className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="block h-6 w-6" aria-hidden="true" />
               )}
-              <SignedOut>
-                <SignInButton mode="modal">
-                  <button className="text-gray-300 hover:text-white transition-colors mt-2 sm:mt-0">
-                    Sign In
-                  </button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full transition-colors mt-2 sm:mt-0">
-                    Sign Up
-                  </button>
-                </SignUpButton>
-              </SignedOut>
-              <SignedIn>
-                <UserButton
-                  appearance={{
-                    elements: {
-                      avatarBox: "w-10 h-10",
-                    },
-                  }}
-                />
-              </SignedIn>
-            </div>
+            </Button>
           </div>
         </div>
-      </nav>
-    </header>
-  );
+      </div>
+
+      {isMenuOpen && (
+        <div className="sm:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            <Link href="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+              Home
+            </Link>
+            <Link href="/pricing" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+              Pricing
+            </Link>
+            <Link href="/features" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+              Features
+            </Link>
+            <Link href="/dashboard" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+              Dashboard
+            </Link>
+            <Button variant="ghost" className="w-full justify-start text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+              Sign In
+            </Button>
+            <Button className="w-full mt-2">Sign Up</Button>
+          </div>
+        </div>
+      )}
+    </nav>
+  )
 }
