@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { headers } from "next/headers";
 import { createOrUpdateSubscription, updateUserPoints } from "../../../../../utils/db/actions";
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-06-20",
 });
@@ -23,10 +24,18 @@ export async function POST(req: Request) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
-  } catch (err: any) {
-    console.error(`Webhook signature verification failed: ${err.message}`);
+  } catch (err: unknown) {
+    // Change err: any to err: unknown
+    if (err instanceof Error) {
+      console.error(`Webhook signature verification failed: ${err.message}`);
+      return NextResponse.json(
+        { error: `Webhook Error: ${err.message}` },
+        { status: 400 }
+      );
+    }
+    console.error(`Webhook signature verification failed: ${String(err)}`);
     return NextResponse.json(
-      { error: `Webhook Error: ${err.message}` },
+      { error: "Webhook Error: Unknown error" },
       { status: 400 }
     );
   }
@@ -105,10 +114,17 @@ export async function POST(req: Request) {
       await updateUserPoints(userId, pointsToAdd);
 
       console.log(`Successfully processed subscription for user ${userId}`);
-    } catch (error: any) {
-      console.error("Error processing subscription:", error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error processing subscription:", error);
+        return NextResponse.json(
+          { error: "Error processing subscription", details: error.message },
+          { status: 500 }
+        );
+      }
+      console.error("Error processing subscription:", String(error));
       return NextResponse.json(
-        { error: "Error processing subscription", details: error.message },
+        { error: "Error processing subscription", details: "Unknown error" },
         { status: 500 }
       );
     }

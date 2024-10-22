@@ -75,14 +75,13 @@
 
     useEffect(() => {
         if (isLoaded && !isSignedIn) {
-        router.push("/");
+            router.push("/");
         } else if (isSignedIn && user) {
-        console.log("User loaded:", user);
-        fetchUserPoints();
-        fetchContentHistory();
+            console.log("User loaded:", user);
+            fetchUserPoints();
+            fetchContentHistory();
         }
     }, [isLoaded, isSignedIn, user, router]);
-
     const fetchUserPoints = async () => {
         if (user?.id) {
         console.log("Fetching points for user:", user.id);

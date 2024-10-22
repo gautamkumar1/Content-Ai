@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image" // Import Image from next/image
 
 export default function Footer() {
   return (
@@ -6,7 +7,13 @@ export default function Footer() {
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <a href="https://flowbite.com/" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-            <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
+            <Image 
+              src="https://flowbite.com/docs/images/logo.svg" 
+              className="h-8" 
+              alt="Flowbite Logo" 
+              width={32} // Set appropriate width
+              height={32} // Set appropriate height
+            />
             <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
               ContentTura AI
             </span>
