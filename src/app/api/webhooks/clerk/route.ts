@@ -50,20 +50,29 @@ export async function POST(req: Request) {
   // Do something with the payload
   const { id: eventId } = evt.data;  // Renamed `id` to `eventId` to avoid conflict
   const eventType = evt.type;
-
+  if (!eventId) {
+    console.error('Event ID is missing');
+    return new Response('Missing event ID', { status: 400 });
+  }
+  
+  
   if (eventType === 'user.created' || eventType === 'user.updated') {
     const { email_addresses, first_name, last_name } = evt.data; // Removed redundant id destructuring
-    const email = email_addresses[0]?.email_address;
-    const name = `${first_name} ${last_name}`;
-
-    if (email) {
-      try {
-        await createOrUpdateUser(eventId, email, name);  // Use `eventId` instead of `id`
-      } catch (error: unknown) {
-        console.error('Error creating or updating user:', error);
-        return new Response('Error occurred', { status: 500 });
-      }
+    const email = email_addresses[0]?.email_address || '';
+    const name = `${first_name || ''} ${last_name || ''}`.trim();  // Fallback to empty string and trim to remove extra spaces
+    
+    if (!email) {
+      console.error('Email is missing');
+      return new Response('Missing email', { status: 400 });
     }
+    
+    try {
+      await createOrUpdateUser(eventId, email, name);
+    } catch (error: unknown) {
+      console.error('Error creating or updating user:', error);
+      return new Response('Error occurred', { status: 500 });
+    }
+    
   }
 
   return new Response('', { status: 200 });
