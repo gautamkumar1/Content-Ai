@@ -1,3 +1,4 @@
+
 import PricingPage from "@/app/pricing/page"
 import FeaturesSection from "@/app/features/page"
 import { HeroScrollDemo } from "./DashboardImage"
@@ -5,10 +6,11 @@ import { Button } from "./ui/button"
 import Link from "next/link";
 import { MarqueeDemo } from "./Testimonials"
 import { AccordionDemo } from "./Faq"
-
 export default function LandingPage() {
   return (
+
     <div className="bg-black min-h-screen text-white">
+
       <main className="text-center px-6 py-20">
         <h1 className="text-5xl md:text-7xl font-bold mb-6">
           <span className="text-gray-500">Create Engaging </span>
@@ -18,25 +20,39 @@ export default function LandingPage() {
         <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12">
           Boost your social media presence with our AI-powered content creation tool. Save time and increase engagement.
         </p>
+        {/* <div className="flex justify-center items-center space-x-2 mb-4">
+          <div>
+            <Link href={"/generate"}>
+              <Button variant="outline" size="lg" className="font- m-7">
+                Start Creating
+              </Button>
+            </Link>
+            <Link href={"/contact"}>
+              <Button variant="outline" size="lg">
+                Contact Us
+              </Button>
+            </Link>
+          </div>
+        </div> */}
 
         <div className="flex justify-center items-center space-x-2 mb-4">
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4 mt-10">
+
             <Link href={"/generate"}>
               <Button variant="outline" size="lg" className="w-40 h-10 border-transparent text-white text-sm">
                 Start Creating
               </Button>
             </Link>
             <Link href={"/"}>
-              <Button variant="outline" size="lg" className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm">
+              <Button variant="outline" size="lg" className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
                 Learn More
               </Button>
             </Link>
           </div>
         </div>
         <p className="text-gray-400 mt-2">Trusted by 27,000+ creators</p>
-
         {/* Dashboard Section Image */}
-        <div>
+        <div >
           <HeroScrollDemo />
         </div>
 
@@ -72,6 +88,7 @@ export default function LandingPage() {
           </div>
         </div>
       </main>
+
     </div>
   )
 }
