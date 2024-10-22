@@ -3,7 +3,6 @@
 import { CheckIcon } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
-import { Navbar } from "@/Components/Navbar";
 import { Button } from "@/Components/ui/button";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -85,7 +84,6 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen bg-black text-gray-100">
-      <Navbar />
       <main className="container mx-auto px-8 py-20">
         <h1 className="text-5xl font-bold mb-12 text-center text-white">
           Pricing Plans
@@ -94,14 +92,22 @@ export default function PricingPage() {
           {pricingPlans.map((plan, index) => (
             <div
               key={index}
-              className="p-8 rounded-lg border border-gray-800 flex flex-col"
+              className="group p-8 rounded-lg border border-gray-800 flex flex-col
+                         transition-all duration-300 ease-in-out
+                         hover:border-blue-500/30 hover:bg-blue-950/10
+                         hover:shadow-[0_0_25px_rgba(59,130,246,0.1)]
+                         hover:transform hover:scale-105
+                         backdrop-blur-sm"
             >
-              <h2 className="text-2xl font-bold mb-4 text-white">
+              <h2 className="text-2xl font-bold mb-4 text-white
+                           group-hover:text-blue-200 transition-colors">
                 {plan.name}
               </h2>
-              <p className="text-4xl font-bold mb-6 text-white">
+              <p className="text-4xl font-bold mb-6 text-white
+                          group-hover:text-blue-100 transition-colors">
                 ${plan.price}
-                <span className="text-lg font-normal text-gray-400">
+                <span className="text-lg font-normal text-gray-400
+                               group-hover:text-blue-300/60">
                   /month
                 </span>
               </p>
@@ -109,9 +115,11 @@ export default function PricingPage() {
                 {plan.features.map((feature, featureIndex) => (
                   <li
                     key={featureIndex}
-                    className="flex items-center mb-3 text-gray-300"
+                    className="flex items-center mb-3 text-gray-300
+                             group-hover:text-blue-200/90 transition-colors"
                   >
-                    <CheckIcon className="w-5 h-5 mr-2 text-green-500" />
+                    <CheckIcon className="w-5 h-5 mr-2 text-green-500
+                                      group-hover:text-blue-400 transition-colors" />
                     {feature}
                   </li>
                 ))}
@@ -119,7 +127,10 @@ export default function PricingPage() {
               <Button
                 onClick={() => plan.priceId && handleSubscribe(plan.priceId)}
                 disabled={isLoading || !plan.priceId}
-                className="w-full bg-white text-black hover:bg-gray-200"
+                className="w-full bg-white text-black 
+                         transition-all duration-300
+                         hover:bg-blue-100 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]
+                         disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? "Processing..." : "Choose Plan"}
               </Button>

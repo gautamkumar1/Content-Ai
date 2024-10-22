@@ -30,14 +30,17 @@
     import { InstagramMock } from "@/Components/social-mocks/InstagramMock";
     import { LinkedInMock } from "@/Components/social-mocks/LinkedInMock";
 
+
     const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
     const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 
     const contentTypes = [
-    { value: "twitter", label: "Twitter Thread" },
-    { value: "instagram", label: "Instagram Caption" },
-    { value: "linkedin", label: "LinkedIn Post" },
+        { value: "twitter", label: "Twitter Thread" },
+        { value: "instagram", label: "Instagram Caption" },
+        { value: "linkedin", label: "LinkedIn Post" },
+        
     ];
+    
 
     const MAX_TWEET_LENGTH = 280;
     const POINTS_PER_GENERATION = 5;
@@ -226,6 +229,7 @@
             return <InstagramMock content={generatedContent[0]} />;
         case "linkedin":
             return <LinkedInMock content={generatedContent[0]} />;
+        
         default:
             return null;
         }
