@@ -1,8 +1,8 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import {ClerkProvider} from "@clerk/nextjs";
 import {dark} from "@clerk/themes";
-import "./globals.css";
 import Footer from "@/Components/Footer";
 import { Navbar } from "@/Components/Navbar";
 
