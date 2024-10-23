@@ -4,7 +4,7 @@ import {ClerkProvider} from "@clerk/nextjs";
 import {dark} from "@clerk/themes";
 import "./globals.css";
 import Footer from "@/Components/Footer";
-import Navbar from "@/Components/Navbar";
+import { Navbar } from "@/Components/Navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
