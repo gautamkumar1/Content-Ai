@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="public/contentTura-Dashboard.png" alt="ContentTura AI Logo" />
-</p>
 
 # ContentTura AI: Social Media Content Generator
 
@@ -47,28 +44,27 @@ ContentTura AI is a powerful Next.js application that leverages AI to generate e
    Create a `.env.local` file in the root directory and add the following variables:
 
    ```
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-WEBHOOK_SECRET=
-NEXT_PUBLIC_DATABASE_URL=
-NEXT_MAILTRAP_TOKEN=
-NEXT_MAILTRAP_SENDER_EMAIL=
-NEXT_MAILTRAP_RECIPIENT_EMAIL=
-STRIPE_SECRET_KEY = 
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
-NEXT_PUBLIC_BASE_URL= 
-STRIPE_WEBHOOK_SECRET = 
-NEXT_PUBLIC_GEMINI_API_KEY = 
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+    CLERK_SECRET_KEY=
+    WEBHOOK_SECRET=
+    NEXT_PUBLIC_DATABASE_URL=
+    NEXT_MAILTRAP_TOKEN=
+    NEXT_MAILTRAP_SENDER_EMAIL=
+    NEXT_MAILTRAP_RECIPIENT_EMAIL=
+    STRIPE_SECRET_KEY = 
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+    NEXT_PUBLIC_BASE_URL= 
+    STRIPE_WEBHOOK_SECRET = 
+    NEXT_PUBLIC_GEMINI_API_KEY = 
+```
 
-   ```
-
-4. Run the development server:
+5. Run the development server:
 
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Deployment
 
