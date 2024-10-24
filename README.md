@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="public/contentTura-Dashboard.png" alt="ContentTura AI Logo" />
+</p>
+
+# ContentTura AI: Social Media Content Generator
+
+ContentTura AI is a powerful Next.js application that leverages AI to generate engaging content for various social media platforms. This project uses cutting-edge technologies to provide users with an intuitive interface for creating Twitter threads, Instagram captions, and LinkedIn posts.
+
+## Features
+
+- AI-powered content generation for Twitter, Instagram, and LinkedIn
+- User authentication and account management with Clerk
+- Points-based system for content generation
+- Content history and regeneration
+- Responsive design for desktop and mobile devices
+- Preview functionality for generated content
+- Integration with Google's Generative AI (Gemini)
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) - React framework for building the frontend and API routes
+- [TypeScript](https://www.typescriptlang.org/) - Typed superset of JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Clerk](https://clerk.com/) - Authentication and user management
+- [Google Generative AI](https://ai.google.dev/) - AI model for content generation
+- [Drizzle ORM](https://orm.drizzle.team/) - TypeScript ORM for database management
+- [Neon Database](https://neon.tech/) - Serverless Postgres database
+- [Stripe](https://stripe.com/) - Payment processing for subscriptions
+- [Lucide React](https://lucide.dev/) - Icon library
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   git clone https://github.com/gautamkumar1/Contentura-AI
+   cd contentura-ai
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory and add the following variables:
 
-## Learn More
+   ```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+WEBHOOK_SECRET=
+NEXT_PUBLIC_DATABASE_URL=
+NEXT_MAILTRAP_TOKEN=
+NEXT_MAILTRAP_SENDER_EMAIL=
+NEXT_MAILTRAP_RECIPIENT_EMAIL=
+STRIPE_SECRET_KEY = 
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+NEXT_PUBLIC_BASE_URL= 
+STRIPE_WEBHOOK_SECRET = 
+NEXT_PUBLIC_GEMINI_API_KEY = 
 
-To learn more about Next.js, take a look at the following resources:
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Run the development server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Deployment
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
